@@ -19,14 +19,12 @@ public class ProductRepository {
 
     public ProductRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        // Считываем содержимое файла query.sql
         this.query = read("query.sql");
     }
 
     public List<String> getProductName(String name) {
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
-        // Выполняем запрос и возвращаем список строк (product_name)
         return jdbcTemplate.queryForList(query, params, String.class);
     }
 
